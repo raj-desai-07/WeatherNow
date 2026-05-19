@@ -1,0 +1,186 @@
+<div class="toast-box" id="toast">
+
+    <div class="toast-icon">
+        <i class="fa-solid fa-location-dot"></i>
+    </div>
+
+    <div class="toast-content">
+        <h4>Location Error</h4>
+        <p>City not found. Please try another city.</p>
+    </div>
+
+    <div class="toast-progress"></div>
+
+</div>
+
+<style>
+
+.toast-box{
+    position: fixed;
+    top: -180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 360px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(22px);
+    -webkit-backdrop-filter: blur(22px);
+    border-radius: 28px;
+    padding: 18px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.14);
+    border: 1px solid rgba(255,255,255,0.45);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.9s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.toast-box::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(255,77,79,0.14),
+        rgba(255,255,255,0.02)
+    );
+    pointer-events: none;
+}
+
+.toast-box.show{
+    top: 24px;
+    opacity: 1;
+}
+
+.toast-box.hide{
+    top: -180px;
+    opacity: 0;
+}
+
+.toast-icon{
+    min-width: 58px;
+    height: 58px;
+    border-radius: 18px;
+    background: linear-gradient(
+        135deg,
+        #ff4d4f,
+        #ff7b72
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 25px rgba(255,77,79,0.35);
+    animation: floatIcon 2.8s ease-in-out infinite;
+}
+
+.toast-icon i{
+    color: white;
+    font-size: 24px;
+}
+
+.toast-content h4{
+    margin: 0;
+    font-size: 17px;
+    font-weight: 700;
+    color: #111111;
+    font-family: "Poppins", sans-serif;
+}
+
+.toast-content p{
+    margin: 4px 0 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #666666;
+    font-family: "Poppins", sans-serif;
+}
+
+.toast-progress{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 5px;
+    background: rgba(255,255,255,0.2);
+}
+
+.toast-progress::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(
+        90deg,
+        #ff4d4f,
+        #ff8a80
+    );
+    animation: progress 5s linear forwards;
+}
+
+@keyframes progress{
+
+    from{
+        width: 100%;
+    }
+
+    to{
+        width: 0%;
+    }
+
+}
+
+@keyframes floatIcon{
+
+    0%{
+        transform: translateY(0px);
+    }
+
+    50%{
+        transform: translateY(-5px);
+    }
+
+    100%{
+        transform: translateY(0px);
+    }
+
+}
+
+@media (max-width: 480px){
+
+    .toast-box{
+        width: calc(100% - 28px);
+        padding: 16px;
+        border-radius: 24px;
+    }
+
+}
+
+</style>
+
+<script>
+
+const toast = document.getElementById("toast")
+
+function showToast(){
+
+    toast.classList.remove("hide")
+
+    setTimeout(() => {
+        toast.classList.add("show")
+    }, 100)
+
+    setTimeout(() => {
+
+        toast.classList.remove("show")
+        toast.classList.add("hide")
+
+    }, 5000)
+
+}
+
+showToast()
+
+</script>
